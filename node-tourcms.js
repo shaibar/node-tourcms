@@ -92,9 +92,9 @@ TourCMS.prototype.makeRequest = function(a) {
         // Otherwise call the original callback
 
         if(typeof a.processor !== 'undefined')
-          a.processor(result.response, a.callback);
+          a.processor(result ? result.response : null, a.callback);
         else
-          a.callback(result.response);
+          a.callback(result ? result.response : null);
       });
 
 
@@ -1114,7 +1114,7 @@ TourCMS.prototype.listPayments = function(a) {
       response.payment = [].concat(response.payment);
 
     callback(response);
-    
+
   };
 
   this.makeRequest(a);
@@ -1147,7 +1147,7 @@ TourCMS.prototype.listStaffMembers = function(a) {
       response.users.user = [].concat(response.users.user);
 
     callback(response);
-    
+
   };
 
   this.makeRequest(a);
@@ -1167,7 +1167,7 @@ TourCMS.prototype.showCustomer = function(a) {
 
   // Sanitise response, tours is an array if empty
   a.processor = function(response, callback) {
-  
+
     if(response.error == "OK" && response.customer){
       // Ensure we have an array of custom fields
       if(typeof response.customer.custom_fields !== "undefined")
@@ -1175,7 +1175,7 @@ TourCMS.prototype.showCustomer = function(a) {
       else
         response.customer.custom_fields = {field:[]};
     }
-    
+
     callback(response);
 
   };
