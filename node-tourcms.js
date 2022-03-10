@@ -92,9 +92,9 @@ TourCMS.prototype.makeRequest = function(a) {
         // Otherwise call the original callback
 
         if(typeof a.processor !== 'undefined')
-          a.processor(result ? result.response : null, a.callback);
+          a.processor(result ? result.response : {}, a.callback);
         else
-          a.callback(result ? result.response : null);
+          a.callback(result ? result.response : {});
       });
 
 
